@@ -70,7 +70,9 @@ set expandtab " Use spaces, not tabs, for autoindent/tab key.
 set shiftround " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:> " show matching <> (html mainly) as well
 
-
+set nobackup
+set nowritebackup
+set noswapfile
 set noautowrite " Never write a file unless I request it.
 set noautowriteall " NEVER.
 set noautoread " Don't automatically re-read changed files.
