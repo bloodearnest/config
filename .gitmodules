@@ -1,0 +1,6 @@
+[submodule "_vim/bundle/pyflakes"]
+	path = _vim/bundle/pyflakes
+	url = https://github.com/mitechie/pyflakes-pathogen.git
+[submodule "_vim/bundle/pep8"]
+	path = _vim/bundle/pep8
+	url = https://github.com/vim-scripts/pep8.git

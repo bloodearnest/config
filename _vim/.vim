@@ -1,0 +1,1 @@
+/home/wavy/.myconfig/_vim
