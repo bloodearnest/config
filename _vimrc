@@ -18,7 +18,46 @@ cmap w!! w !sudo tee % >/dev/null
 " Run pep8
 let g:pep8_map='<leader>8'
 
+" window navigation
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
+" and lets make these all work in insert mode too ( <C-O> makes next cmd
+" happen as if in command mode )
+imap <C-W> <C-O><C-W>
+
+" Open NerdTree
+map <leader>n :NERDTreeToggle<CR>
+
+" Paste from clipboard
+map <leader>p "+gP
+
+" open/close the quickfix window
+nmap <leader>c :copen<CR>
+nmap <leader>cc :cclose<CR>
+
+" Jump to the definition of whatever the cursor is on
+map <leader>j :RopeGotoDefinition<CR>
+
+" Rename whatever the cursor is on (including references to it)
+map <leader>r :RopeRename<CR>
+
+
+" Disable the colorcolumn when switching modes. Make sure this is the
+" first autocmd for the filetype here
+autocmd FileType * setlocal colorcolumn=0
+
+""" Insert completion
+" don't select first item, follow typing in autocomplete
+set completeopt=menuone,longest,preview
+set pumheight=6 " Keep a small completion window
+
+" show a line at column 79
+ if exists("&colorcolumn")
+    set colorcolumn=79
+endif
 
 
 " ==========================================================
@@ -28,6 +67,9 @@ let g:pep8_map='<leader>8'
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+
+
 
 " ==========================================================
 " Basic Settings
@@ -81,6 +123,41 @@ set modelines=5 " they must be within the first or last 5 lines.
 set ffs=unix,dos,mac " Try recognizing dos, unix, and mac line endings.
 
 
+" don't outdent hashes
+inoremap # #
+
+" close preview window automatically when we move around
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+"""" Messages, Info, Status
+set ls=2 " allways show status line
+set vb t_vb= " Disable all bells. I hate ringing/flashing.
+set confirm " Y-N-C prompt if closing with unsaved changes.
+set showcmd " Show incomplete normal mode commands as I type.
+set report=0 " : commands always print changed line count.
+set shortmess+=a " Use [+]/[RO]/[w] for modified/readonly/written.
+set ruler " Show some info, even without statuslines.
+set laststatus=2 " Always show statusline, even if only 1 window.
+set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
+
+" displays tabs with :set list & displays when a line runs off-screen
+set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
+set list
+
+" Quit window on <leader>q
+nnoremap <leader>q :q<CR>
+"
+" hide matches on <leader>space
+nnoremap <leader><space> :nohlsearch<cr>
+
+" Remove trailing whitespace on <leader>S
+nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Select the item in the list with enter
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
 """ Searching and Patterns
 set ignorecase " Default to using case insensitive searches,
 set smartcase " unless uppercase letters are used in the regex.
@@ -88,8 +165,6 @@ set smarttab " Handle tabs more intelligently
 set hlsearch " Highlight searches by default.
 set incsearch " Incrementally search while typing a /regex
 
-" Paste from clipboard
-map <leader>p "+gP
 
 
 " ===========================================================
@@ -110,5 +185,6 @@ au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smart
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " Don't let pyflakes use the quickfix window
 "let g:pyflakes_use_quickfix = 0
-
+let g:SuperTabDefaultCompletionType = "context""
+set completeopt=menuone,longest,preview
 
