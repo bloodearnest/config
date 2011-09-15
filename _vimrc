@@ -95,13 +95,11 @@ set laststatus=2 " Always show statusline, even if only 1 window.
 set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:>-,eol:¬,trail:-,precedes:<,extends:>
+set listchars=tab:>>,trail:-,precedes:<,extends:>
 set list
 
 """ Searching and Patterns
 " sane regex
-nnoremap / /\v
-vnoremap / /\v
 set ignorecase " Default to using case insensitive searches,
 set smartcase " unless uppercase letters are used in the regex.
 set gdefault " global by default
