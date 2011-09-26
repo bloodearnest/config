@@ -1,0 +1,8 @@
+
+
+#=========================
+# customisations
+#=========================
+
+# fabric bash completion
+source $MYCONFIG/fab-complete

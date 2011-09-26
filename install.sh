@@ -22,6 +22,12 @@ link_file $i
     done
 fi
 
+[[ -f orig_bashrc ]] || cp ~/.bashrc orig_bashrc
+
+echo "MYCONFIG=`pwd`" > ~/.bashrc
+cat orig_bashrc >> ~/.bashrc
+cat mybashrc    >> ~/.bashrc
+
 git submodule sync
 git submodule init
 git submodule update
