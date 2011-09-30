@@ -6,3 +6,8 @@
 
 # fabric bash completion
 source $MYCONFIG/fab-complete
+
+# autosave history
+shopt -s histappend
+export HISTIGNORE="&:ls:[bf]g:exit:history"
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
