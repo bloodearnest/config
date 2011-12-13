@@ -1,7 +1,7 @@
 
 
 #=========================
-# customisations
+# my customisations
 #=========================
 
 # fabric bash completion
@@ -11,3 +11,8 @@ source $MYCONFIG/fab-complete
 shopt -s histappend
 export HISTIGNORE="&:ls:[bf]g:exit:history"
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+# pip reliability
+mkdir -p $HOME/.pip_download_cache
+export PIP_USE_MIRRORS=true
+export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
