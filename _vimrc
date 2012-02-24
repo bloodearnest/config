@@ -1,3 +1,18 @@
+" vundle setup
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" my plugins
+Bundle 'git://git.wincent.com/command-t.git'
+
+
 " ==========================================================
 " General setup
 " ==========================================================
@@ -5,14 +20,6 @@
 set modelines=0 " disable security holes
 set nocompatible " not compatiable with vi
 set encoding=utf-8
-
-" ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-" Load pathogen with docs for all plugins
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
 " ==========================================================
 " Basic Settings
@@ -92,7 +99,6 @@ set showcmd " Show incomplete normal mode commands as I type.
 set report=0 " : commands always print changed line count.
 set shortmess+=a " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2 " Always show statusline, even if only 1 window.
-set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:->,trail:-,precedes:<,extends:>

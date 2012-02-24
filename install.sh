@@ -11,14 +11,14 @@ function link_file {
 }
 
 if [ "$1" = "vim" ]; then
-for i in _vim*
+    for i in _vim*
     do
-link_file $i
+        link_file $i
     done
 else
-for i in _*
+    for i in _*
     do
-link_file $i
+        link_file $i
     done
 fi
 
@@ -28,9 +28,4 @@ echo "MYCONFIG=`pwd`" > ~/.bashrc
 cat orig_bashrc >> ~/.bashrc
 cat mybashrc    >> ~/.bashrc
 
-git submodule sync
-git submodule init
-git submodule update
-git submodule foreach git pull origin master
-git submodule foreach git submodule init
-git submodule foreach git submodule update
+./update.sh
