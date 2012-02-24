@@ -11,7 +11,13 @@ Bundle 'gmarik/vundle'
 
 " my plugins
 Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'Lokaltog/vim-powerline'
 
+"synatx hightlighting
+Bundle 'python.vim--Vasiliev'
+
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/syntastic'
 
 " ==========================================================
 " General setup
@@ -185,22 +191,9 @@ au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smart
 " Don't let pyflakes use the quickfix window
 "let g:pyflakes_use_quickfix = 0
 
-"pep8
-let g:pep8_map='<leader>8'
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 
-" NerdTree
-" Open NerdTree
-map <leader>n :NERDTreeToggle<CR>
-
-
-" Rope
-" Jump to the definition of whatever the cursor is on
-map <leader>j :RopeGotoDefinition<CR>
-
-" Rename whatever the cursor is on (including references to it)
-map <leader>r :RopeRename<CR>
-
+let g:syntastic_enable_signs=1
