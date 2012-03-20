@@ -181,6 +181,14 @@ au BufRead *.js set makeprg=jslint\ %
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
 
 
 " ===========================================================
@@ -197,3 +205,4 @@ au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smart
 set completeopt=menuone,longest,preview
 
 let g:syntastic_enable_signs=1
+
