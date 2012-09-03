@@ -8,6 +8,8 @@
 source $MYCONFIG/fab-complete
 
 # autosave history
+HISTSIZE=5000
+HISTFILESIZE=10000
 shopt -s histappend
 export HISTIGNORE="&:ls:[bf]g:exit:history"
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"

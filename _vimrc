@@ -15,6 +15,7 @@ Bundle 'Lokaltog/vim-powerline'
 
 "synatx hightlighting
 Bundle 'python.vim--Vasiliev'
+Bundle 'altercation/vim-colors-solarized'
 
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
@@ -35,7 +36,7 @@ filetype on " try to detect filetypes
 filetype plugin indent on " enable loading indent file for filetype
 
 """ appearence
-colorscheme molokai
+colorscheme solarized
 set background=dark " We are using dark background in vim
 set title " show title in console title bar
 
@@ -107,7 +108,7 @@ set shortmess+=a " Use [+]/[RO]/[w] for modified/readonly/written.
 set laststatus=2 " Always show statusline, even if only 1 window.
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:->,trail:-,precedes:<,extends:>
+set listchars=tab:¦·,trail:·,precedes:<,extends:>
 set list
 
 """ Searching and Patterns
@@ -118,6 +119,7 @@ set gdefault " global by default
 set smarttab " Handle tabs more intelligently
 set hlsearch " Highlight searches by default.
 set incsearch " Incrementally search while typing a /regex
+
 
 
 
