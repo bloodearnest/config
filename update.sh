@@ -13,3 +13,5 @@ CMDT=_vim/bundle/command-t/ruby/command-t
 
 # build command-t
 (cd $CMDT && ruby extconf.rb && make)
+
+wget -O django_bash_completion.sh https://raw.github.com/django/django/master/extras/django_bash_completion

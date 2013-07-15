@@ -1,35 +1,42 @@
 
 
 _check() {
+    SKIP=false
     # Fab in the path?
-    [[ -n `/usr/bin/which fab` ]] || exit 0
+    [[ -n `/usr/bin/which fab` ]] || SKIP=true
     # Fabfile in this folder?
-    [[ -e fabfile.py ]] || exit 0
+    [[ -e fabfile.py ]] || SKIP=true
 }
 
 _fab_completion_0() {
     COMPREPLY=()
     _check
-    tasks=$(fab -l 2>/dev/null | grep "^    " | awk '{print $1;}')
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    COMPREPLY=( $(compgen -W "${tasks}" -- ${cur}) )
+    if [ "$SKIP" != "true" ]
+    then
+        tasks=$(fab -l 2>/dev/null | grep "^    " | awk '{print $1;}')
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=( $(compgen -W "${tasks}" -- ${cur}) )
+    fi
 }
 
 _fab_completion_1() {
     COMPREPLY=()
     _check
-    tasks=$(fab --shortlist)
-    local cur="${COMP_WORDS[COMP_CWORD]}"
-    COMPREPLY=( $(compgen -W "${tasks}" -- ${cur}) )
+    if [ "$SKIP" != "true" ]
+    then
+        tasks=$(fab --shortlist)
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=( $(compgen -W "${tasks}" -- ${cur}) )
+    fi
 }
 
-
-if [[ `fab --help|grep -c shortlist` -gt 0 ]]
+if [[ -n `/usr/bin/which fab` ]]
 then
-    complete -F _fab_completion_1 fab
-else
-    # fab < 1.0
-    complete -F _fab_completion_0 fab
+    if [[ `fab --help|grep -c shortlist` -gt 0 ]]
+    then
+        complete -F _fab_completion_1 fab
+    else
+        # fab < 1.0
+        complete -F _fab_completion_0 fab
+    fi
 fi
-
-

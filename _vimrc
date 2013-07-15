@@ -16,9 +16,14 @@ Bundle 'Lokaltog/vim-powerline'
 "synatx hightlighting
 Bundle 'python.vim--Vasiliev'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/glsl.vim'
+Bundle 'othree/html5.vim'
+Bundle 'sophacles/vim-bundle-mako'
 
+" misc
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
+Bundle 'xaviershay/tslime.vim'
 
 " ==========================================================
 " General setup
@@ -37,8 +42,16 @@ filetype plugin indent on " enable loading indent file for filetype
 
 """ appearence
 colorscheme solarized
+set t_Co=16         " use more nice colors
 set background=dark " We are using dark background in vim
-set title " show title in console title bar
+set title           " show title in console title bar
+
+" gnome terminal only
+"if has("autocmd")
+"    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"endif
 
 """ completions
 set wildmenu " Menu completion in command mode on <Tab>
@@ -59,11 +72,9 @@ set backspace=2 " Allow backspacing over autoindent, EOL, and BOL
 """line numbers
 set number " Display line numbers
 set numberwidth=1 " using only 1 column (and 1 space) while possible
-set relativenumber " relative line nos
 set ruler " show the cursor position all the time
 
 """ line endings/length
-set textwidth=79
 set formatoptions=tcroqn1
 set colorcolumn=+1 "one beyond textwidth
 "#highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
@@ -92,7 +103,7 @@ set noautowrite " Never write a file unless I request it.
 set noautowriteall " NEVER.
 set noautoread " Don't automatically re-read changed files.
 " save on focus lost
-au FocusLost * :wa 
+au FocusLost * :wa
 
 " close preview window automatically when we move around
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -173,15 +184,16 @@ nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Mako/HTML
 autocmd BufNewFile,BufRead *.mako,*.mak setlocal ft=html
-autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,xhtml,xml,css setlocal shiftwidth=2 tabstop=2 softtabstop=2 tw=0
 
-"Javascript
-au BufRead *.js set makeprg=jslint\ %
+" opengl
+au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl 
 
 " Python
 "au BufRead *.py compiler nose
 au FileType python set omnifunc=pythoncomplete#Complete
-au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+au FileType python inoremap # X#
+au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent textwidth=79 cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -190,8 +202,14 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.py,*.ly,*.rst,*.txt,*.js,*.html,*.css :call <SID>StripTrailingWhitespaces()
 
+filetype off
+set runtimepath+=/usr/share/lilypond/2.14.2/vim/
+filetype on
+
+let g:syntastic_javascript_jslint_conf = "--vars --nomen" 
+"--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy"
 
 " ===========================================================
 " Plugin config

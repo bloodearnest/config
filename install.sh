@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+
+# configure config directory
+echo "MYCONFIG=`pwd`" > ~/.myconfig_path
+
+# first time install?
+[ -f orig_bashrc ] || cp ~/.bashrc orig_bashrc
+./update.sh
+
 function link_file {
     source="${PWD}/$1"
     target="${HOME}/${1/_/.}"
@@ -21,11 +29,3 @@ else
         link_file $i
     done
 fi
-
-[[ -f orig_bashrc ]] || cp ~/.bashrc orig_bashrc
-
-echo "MYCONFIG=`pwd`" > ~/.bashrc
-cat orig_bashrc >> ~/.bashrc
-cat mybashrc    >> ~/.bashrc
-
-./update.sh
