@@ -1,13 +1,15 @@
 source ~/.myconfig_path
 
+PATH="$PATH:~/node_modules/.bin:./node_modules/.bin:~/.local/bin"
+
 if [ -f "$MYCONFIG/orig_bashrc" ] ; then
     source "$MYCONFIG/orig_bashrc"
 fi
 
 # fabric bash completion
 source $MYCONFIG/fab-complete
-
 source $MYCONFIG/django_bash_completion.sh
+source $MYCONFIG/juju-complete.sh
 
 # make tmux work properly with solarized colours
 alias tmux="TERM=screen-256color-bce tmux"
@@ -24,7 +26,6 @@ export IGNOREEOF=1
 
 # pip reliability
 mkdir -p $HOME/.pip_download_cache
-export PIP_USE_MIRRORS=true
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 
 # cd convienince
@@ -39,9 +40,17 @@ do
     [ -d $path ] && CDPATH="$CDPATH:$path"
 done
 
-PATH="$PATH:~/node_modules/.bin:./node_modules/.bin"
 
 #export LONG_RUNNING_PREEXEC_LOCATION=$MYCONFIG/undistract-me/preexec.bash
 #. $MYCONFIG/undistract-me/long-running.bash
 #notify_when_long_running_commands_finish_install
 
+LOCALBIN=~/.local/bin
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+if [ -f $LOCALBIN/virtualenvwrapper.sh ]
+then
+    #export VIRTUALENVWRAPPER_VIRTUALENV=$LOCALBIN/virtualenv
+    export VIRTUALENVWRAPPER_SCRIPT=$LOCALBIN/virtualenvwrapper.sh
+    source $LOCALBIN/virtualenvwrapper_lazy.sh
+fi
