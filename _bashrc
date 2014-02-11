@@ -9,7 +9,7 @@ fi
 # fabric bash completion
 source $MYCONFIG/fab-complete
 source $MYCONFIG/django_bash_completion.sh
-source $MYCONFIG/juju-complete.sh
+source $MYCONFIG/juju-core.bash_completion.sh
 
 # make tmux work properly with solarized colours
 alias tmux="TERM=screen-256color-bce tmux"
