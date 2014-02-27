@@ -19,6 +19,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/glsl.vim'
 Bundle 'othree/html5.vim'
 Bundle 'sophacles/vim-bundle-mako'
+Bundle 'jnwhiteh/vim-golang'
 
 " misc
 Bundle 'ervandew/supertab'
@@ -194,6 +195,8 @@ au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl setf glsl
 au FileType python set omnifunc=pythoncomplete#Complete
 au FileType python inoremap # X#
 au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent textwidth=79 cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+
+au FileType go setlocal noexpandtab shiftwidth=4 tabstop=4
 
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")

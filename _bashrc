@@ -54,3 +54,27 @@ then
     export VIRTUALENVWRAPPER_SCRIPT=$LOCALBIN/virtualenvwrapper.sh
     source $LOCALBIN/virtualenvwrapper_lazy.sh
 fi
+
+# Print the current juju environment name in the prompt
+function show_juju_env {
+    local jujuHome
+    local currentEnv
+    [[ -n "$JUJU_HOME" ]] && jujuHome="${JUJU_HOME}" || jujuHome="${HOME}/.juju"
+    if [[ -n "$JUJU_ENV" ]]; then
+        currentEnv="${JUJU_ENV}"
+        echo a
+    else
+        local envFile="${jujuHome}/current-environment"
+        if [[ ! -e "$envFile" ]]; then
+            echo `juju switch` > "${envFile}"
+        fi
+        currentEnv=`cat $envFile`
+    fi
+    local currentEnvJenv="${jujuHome}/environments/${currentEnv}.jenv"
+    if [[ -e "$currentEnvJenv" ]]; then
+        printf "[\e[38;5;70m%s\e[0m] " "$currentEnv"
+    else
+        printf "[\e[38;5;88m%s\e[0m] " "$currentEnv"
+    fi
+}
+export PS1="\$(show_juju_env)${PS1}";
