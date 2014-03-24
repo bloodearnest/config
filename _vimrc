@@ -10,7 +10,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " my plugins
-Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'Lokaltog/vim-powerline'
 
 "synatx hightlighting
@@ -22,7 +21,6 @@ Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jnwhiteh/vim-golang'
 
 " misc
-Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'xaviershay/tslime.vim'
 

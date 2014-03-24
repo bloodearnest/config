@@ -2,3 +2,4 @@
 orig_bashrc
 django_bash_completion.sh
 fab-complete
+_vim/bundle

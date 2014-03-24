@@ -62,7 +62,6 @@ function show_juju_env {
     [[ -n "$JUJU_HOME" ]] && jujuHome="${JUJU_HOME}" || jujuHome="${HOME}/.juju"
     if [[ -n "$JUJU_ENV" ]]; then
         currentEnv="${JUJU_ENV}"
-        echo a
     else
         local envFile="${jujuHome}/current-environment"
         if [[ ! -e "$envFile" ]]; then
