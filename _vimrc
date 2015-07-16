@@ -14,11 +14,11 @@ Bundle 'Lokaltog/vim-powerline'
 
 "synatx hightlighting
 Bundle 'python.vim--Vasiliev'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/glsl.vim'
 Bundle 'othree/html5.vim'
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'rust-lang/rust.vim'
 
 " misc
 Bundle 'scrooloose/syntastic'
@@ -31,6 +31,7 @@ Bundle 'xaviershay/tslime.vim'
 set modelines=0 " disable security holes
 set nocompatible " not compatiable with vi
 set encoding=utf-8
+nnoremap Q <nop> " disable Ex mode
 
 " ==========================================================
 " Basic Settings
@@ -40,8 +41,8 @@ filetype on " try to detect filetypes
 filetype plugin indent on " enable loading indent file for filetype
 
 """ appearence
-colorscheme solarized
-set t_Co=16         " use more nice colors
+colorscheme ubuntu
+set t_Co=256        " use more nice colors
 set background=dark " We are using dark background in vim
 set title           " show title in console title bar
 
